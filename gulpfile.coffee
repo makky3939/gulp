@@ -1,6 +1,12 @@
-gulp = require "gulp"
+gulp   = require "gulp"
 coffee = require "gulp-coffee"
-clean = require "gulp-clean"
+clean  = require "gulp-clean"
+jade   = require "gulp-jade"
+
+gulp.task "jade", ->
+  gulp.src "src/jade/*.jade"
+    .pipe jade()
+    .pipe gulp.dest "dst/"
 
 gulp.task "coffee", ->
   gulp.src "src/coffee/*.coffee"
@@ -12,6 +18,7 @@ gulp.task "clean", ->
     .pipe clean()
 
 gulp.task "watch", ->
+  gulp.watch "src/jade/**", ["jade"]
   gulp.watch "src/coffee/**", ["coffee"]
 
 # Default task
